@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: nginx_svc
+    ports:
+      - 8080:80
+    volumes:
+      - ./files/:/usr/share/nginx/html
+    networks:
+      nginx_network:
+        aliasses:
+          - nginx_host
+volumes: 
+    html: {}
+networks:
+  nginx_network:
+    name: nginx_net
+    driver: bridge
+    ipam: 
+      driver: default
